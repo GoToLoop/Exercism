@@ -3,15 +3,14 @@ from typing import Callable, Any
 import re
 
 VOWEL_PATTERN = re.compile('''
-    ( [aeiou] # single vowels
-    | yt      # 'yt' as a vowel
-    | xr      # 'xr' as a vowel
-    ) +       # matches 1 or more vowel sequence
-''', re.VERBOSE)
+    [aeiou]+ # one or more single vowels
+    | yt     # 'yt' as a vowel
+    | xr     # 'xr' as a vowel
+''', re.VERBOSE) # matches a vowel sequence
 
 SUFFIX = 'ay' # all words end w/ 'ay'
 
-def find_match(word: str): return VOWEL_PATTERN.search(word)
+def vowel_match(word: str): return VOWEL_PATTERN.search(word)
 
 def translate(text: str): # check & apply a rule for each word in string
     for i,word in enumerate(words := text.split()): # iterate over each word
@@ -23,30 +22,30 @@ def translate(text: str): # check & apply a rule for each word in string
     return ' '.join(words) # convert array of words back to 1 string
 #################################### Rule 4 ####################################
 def check_rule_4(word: str): # 'y' after consonant(s) is treated as a vowel
-    if not (m := find_match(word)): return word[-1] == 'y' # no vowels case
+    if not (m := vowel_match(word)): return word[-1] == 'y' # no vowels case
     return (idx := m.start()) and word[idx] == 'y' # there are vowels after 'y'
 
 
 def apply_rule_4(word: str): # move all starting consonants after 'y'
-    idx = (m := find_match(word)) and m.start() # index of 1st vowel after 'y'
+    idx = (m := vowel_match(word)) and m.start() # index of 1st vowel after 'y'
     return (word[idx:] + word[:idx] if idx else word[-1] + word[:-1]) + SUFFIX
 #################################### Rule 3 ####################################
 def check_rule_3(word: str): # 'qu' preceded or not by a consonant
-    if not (m := find_match(word)): return False # no vowels match found
+    if not (m := vowel_match(word)): return False # no vowels match found
     return word[idx := m.start()] == 'u' and word[idx-1] == 'q'
 
 
 def apply_rule_3(word: str): # move all consonants plus 'u' to end of word
-    idx = find_match(word).start() + 1 # index after vowel 'u'
+    idx = vowel_match(word).start() + 1 # index after vowel 'u'
     return word[idx:] + word[:idx] + SUFFIX
 #################################### Rule 2 ####################################
-def check_rule_2(word: str): return (m := find_match(word)) and m.start() > 0
+def check_rule_2(word: str): return (m := vowel_match(word)) and m.start() > 0
 
 def apply_rule_2(word: str): # move all starting consonants after vowel cluster
-    idx = find_match(word).start() # 1st vowel index
+    idx = vowel_match(word).start() # 1st vowel index
     return word[idx:] + word[:idx] + SUFFIX
 #################################### Rule 1 ####################################
-def check_rule_1(word: str): return (m := find_match(word)) and not m.start()
+def check_rule_1(word: str): return (m := vowel_match(word)) and not m.start()
 
 def apply_rule_1(word: str): return word + SUFFIX # starting vowel sound case
 ################################## Find Rules ##################################
