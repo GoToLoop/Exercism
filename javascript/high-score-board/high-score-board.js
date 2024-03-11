@@ -6,9 +6,7 @@
  *
  * @returns {Record<string, number>} new score board
  */
-export function createScoreBoard() {
-  return { 'The Best Ever': 1_000_000 };
-}
+export const createScoreBoard = () => ({ 'The Best Ever': 1_000_000 });
 
 /**
  * Adds a player to a score board.
@@ -18,10 +16,8 @@ export function createScoreBoard() {
  * @param {number} score highest point mapped to `player`
  * @returns {Record<string, number>} updated score board
  */
-export function addPlayer(scoreBoard, player, score) {
-  scoreBoard[player] = score;
-  return scoreBoard;
-}
+export const addPlayer = (scoreBoard, player, score) =>
+  (scoreBoard[player] = score, scoreBoard);
 
 /**
  * Removes a player from a score board.
@@ -30,10 +26,8 @@ export function addPlayer(scoreBoard, player, score) {
  * @param {string} player name whose key is to be deleted from `scoreBoard`
  * @returns {Record<string, number>} updated score board
  */
-export function removePlayer(scoreBoard, player) {
-  delete scoreBoard[player];
-  return scoreBoard;
-}
+export const removePlayer = (scoreBoard, player) =>
+  (delete scoreBoard[player], scoreBoard);
 
 /**
  * Increases a player's score by the given amount.
@@ -43,10 +37,8 @@ export function removePlayer(scoreBoard, player) {
  * @param {number} points value to be added to the score
  * @returns {Record<string, number>} updated score board
  */
-export function updateScore(scoreBoard, player, points) {
-  scoreBoard[player] += points;
-  return scoreBoard;
-}
+export const updateScore = (scoreBoard, player, points) =>
+  (scoreBoard[player] += points, scoreBoard);
 
 /**
  * Applies 100 bonus points to all players on the board.
@@ -65,6 +57,4 @@ export function applyMondayBonus(scoreBoard) {
  * @param {Params} params the parameters for performing the normalization
  * @returns {number} normalized score
  */
-export function normalizeScore(params) {
-  return params.normalizeFunction(params.score);
-}
+export const normalizeScore = params => params.normalizeFunction(params.score);
