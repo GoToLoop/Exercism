@@ -1,7 +1,7 @@
+// @ts-check
+
 /**
- * This tuple array represents the types of vehicles that require a license.
- * 
- * @type {Readonly<['car', 'truck']>}
+ * This frozen array represents the types of vehicles that require a license.
  */
 export const LICENSED_VEHICLE_TYPES = Object.freeze([ 'car', 'truck' ]);
 
@@ -52,7 +52,7 @@ export const AGE_TO_RESELL_PERCENTAGE = Object.freeze(new Map([
  *
  * @param {number} originalPrice vehicle's brand new price
  * @param {number} age how old vehicle is
- * @returns {number} expected resell price in the dealership
+ * @returns {number=} expected resell price in the dealership
  */
 export function calculateResellPrice(originalPrice, age) {
   for (const [ range, rate ] of AGE_TO_RESELL_PERCENTAGE)

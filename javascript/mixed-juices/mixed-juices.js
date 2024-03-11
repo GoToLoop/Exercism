@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Determines how long it takes to prepare a certain juice.
  *
@@ -55,4 +57,5 @@ export function remainingOrders(timeLeft, orders) {
     if (timeLeft <= 0) return true;
     timeLeft -= timeToMixJuice(juice);
   });
+  //return orders.filter(mix => timeLeft <= !(timeLeft -= timeToMixJuice(mix)));
 }

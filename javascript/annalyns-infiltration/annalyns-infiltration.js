@@ -1,4 +1,5 @@
 // Now help Annalyn free her best friend!
+// @ts-check
 
 /**
  * The fast attack is available when the knight is sleeping.

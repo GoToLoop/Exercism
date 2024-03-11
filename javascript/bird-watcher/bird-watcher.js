@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Callback for array method reduce() to get total sum of bird visits.
  * 

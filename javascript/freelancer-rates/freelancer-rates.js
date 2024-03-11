@@ -1,3 +1,5 @@
+// @ts-check
+
 const DAILY_WORK_HOURS = 8, MONTHLY_BILLABLE_DAYS = 22;
 
 /**
