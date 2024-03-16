@@ -46,5 +46,6 @@ export class ProgramWindow {
                          clamp(y, 0, screenSize.height - size.height)), this; }}
 //////////////////////////////// changeWindow() ////////////////////////////////
 export const changeWindow = (win=new ProgramWindow) =>
-  win.resize( win.size.resize(400, 300) ).move( win.position.move(100, 150) );
+  ( win.size.resize(400, 300), win.position.move(100, 150), win );
+  //win.resize( win.size.resize(400, 300) ).move( win.position.move(100, 150) );
 ////////////////////////////////////////////////////////////////////////////////
