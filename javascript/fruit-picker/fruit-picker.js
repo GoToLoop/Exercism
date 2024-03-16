@@ -9,12 +9,6 @@ const SUCCESS = Object.freeze( { message: 'SUCCESS' } ),
 
 export const onSuccess = () => notify(SUCCESS), onError = () => notify(ERROR);
 
-/**
- * @param {GrocerQuery} query
- * @param {FruitPickerSuccessCallback} onSuccessCallback
- * @param {FruitPickerErrorCallback} onErrorCallback
- * @return void
- */
 export const orderFromGrocer = order;
 
 /**
