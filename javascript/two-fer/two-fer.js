@@ -1,2 +1,2 @@
-/** @param {string=} name */
-export const twoFer = name => `One for ${name || 'you'}, one for me.`;
+// @ts-check
+export const twoFer = (name='you') => 'One for ' + name + ', one for me.';
