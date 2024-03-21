@@ -26,7 +26,7 @@ export function checkHumidityLevel(humidityPercentage) {
  */
 export function reportOverheating(t) {
   if (t == null) throw new ArgumentError('Sensor is broken!');
-  else if (t > 500) throw new OverheatingError(t); }
+  if (t > 500) throw new OverheatingError(t); }
 
 /**
  *  Triggers the needed action depending on the result of the machine check.
