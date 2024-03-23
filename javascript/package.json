@@ -1,0 +1,14 @@
+{
+  "name": "Exercism Challenges",
+  "version": "1.0.0",
+  "description": "JS Track",
+  "scripts": {
+    "doc": "doc"
+  },
+  "devDependencies": {
+    "clean-jsdoc-theme": "^4",
+    "eslint": "^8",
+    "eslint-plugin-jsdoc": "^48",
+    "jsdoc": "^4"
+  }
+}

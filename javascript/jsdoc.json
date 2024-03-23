@@ -1,0 +1,37 @@
+{
+  "recurseDepth": 1,
+  "sourceType": "module",
+  "source": {
+    "include": ["."],
+    "includePattern": ".+\\.[m|c]?[j|t]s(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)(_|node_modules|docs|\\.spec\\.js$)"
+  },
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  },
+  "opts": {
+    "destination": "docs/jsdoc",
+    "recurse": true,
+    "encoding": "utf8",
+    "readme": "",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "default_theme": "dark"
+    }
+  },
+  "rules": {
+    "jsdoc/check-access": 1,
+    "jsdoc/check-param-names": 1,
+    "jsdoc/check-tag-names": 1,
+    "jsdoc/check-types": 1,
+    "jsdoc/require-jsdoc": 1,
+    "jsdoc/require-param": 1,
+    "jsdoc/require-returns": 1
+  },
+  "plugins": ["jsdoc"]
+}
