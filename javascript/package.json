@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "JS Track",
   "scripts": {
+    "docs": "docs_gen",
     "doc": "doc"
   },
   "devDependencies": {

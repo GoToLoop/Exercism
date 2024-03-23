@@ -1,4 +1,2 @@
 #!/bin/bash
-for d in ./*/ ; do
-    jsdoc $d -c jsdoc.json -d docs/jsdoc/$(basename $d)
-done
+jsdoc %1 -c jsdoc.json -d docs/jsdoc/%1 --verbose

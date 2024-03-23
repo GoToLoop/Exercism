@@ -26,7 +26,7 @@ const ADVICE = ' is clearly the better choice.';
  *
  * @param {string} option1 the first vehicle option to consider
  * @param {string} option2 the second vehicle option to consider
- * @returns {string} a recommendation message indicating which 
+ * @returns {string} a recommendation message indicating which
  * vehicle option to choose based on alphabetical order
  */
 export function chooseVehicle(option1, option2) {
@@ -37,8 +37,8 @@ export function chooseVehicle(option1, option2) {
  * A map of car age to resell rate.
  * Key-value pairs denote age range (years) and resell rate. For instance:
  * - Cars aged >10 years resell at 50% of cost
- * - Cars aged from >=3 to <=10 years resell at 70% of cost
- * - Cars aged <3 years resell at 80% of cost
+ * - Cars aged from 3 up to 10 years resell at 70% of cost
+ * - Cars aged less than 3 years resell at 80% of cost
  */
 export const AGE_TO_RESELL_PERCENTAGE = Object.freeze(new Map([
   [ 10.001, .5 ], // >10: 50%

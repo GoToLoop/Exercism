@@ -1,3 +1,1 @@
-FOR /D %%G IN (".\*") DO (
-    jsdoc "%%G" -c jsdoc.json -d docs/jsdoc/%%~nG
-)
+jsdoc %1 -c jsdoc.json -d docs/jsdoc/%1 --verbose
