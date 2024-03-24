@@ -3,7 +3,7 @@
   "sourceType": "module",
   "source": {
     "include": ["."],
-    "includePattern": ".+\\.[m|c]?[j|t]s(doc|x)?$",
+    "includePattern": ".+\\.[m|c]?js(doc|x)?$",
     "excludePattern": "node_modules|docs|\\.(spec|config)\\.js$"
   },
   "tags": {

@@ -1,7 +1,7 @@
-declare type Visitor = {
+type Visitor = {
   name: string;
   age: number;
   ticketId: string | null;
 };
 
-declare type VisitorWithGtc = Visitor & { gtc?: { version: string } };
+type VisitorWithGtc = Visitor & { gtc?: { version: string; } };

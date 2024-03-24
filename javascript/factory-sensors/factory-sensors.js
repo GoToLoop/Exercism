@@ -22,7 +22,8 @@ export function checkHumidityLevel(humidityPercentage) {
  *
  * @param {number | null} t machines' temperature
  *
- * @throws {ArgumentError | OverheatingError}
+ * @throws {ArgumentError}
+ * @throws {OverheatingError}
  */
 export function reportOverheating(t) {
   if (t == null) throw new ArgumentError('Sensor is broken!');
@@ -32,13 +33,13 @@ export function reportOverheating(t) {
  *  Triggers the needed action depending on the result of the machine check.
  *
  * @param {{
- *  check: function, // checks the temperature of the machine
- *  alertDeadSensor: function, // alerts a technician temp's sensor is dead
- *  alertOverheating: function, // turns on machine's overheating warning light
- *  shutdown: function // turns the machine off
+ *  check: Function; // checks the temperature of the machine
+ *  alertDeadSensor: Function; // alerts a technician temp's sensor is dead
+ *  alertOverheating: Function; // turns on machine's overheating warning light
+ *  shutdown: Function; // turns the machine off
  * }} actions
  *
- * @throws {ArgumentError|OverheatingError|Error}
+ * @throws {Error}
  */
 export function monitorTheMachine(actions) {
   try { actions.check(); } catch (err) {

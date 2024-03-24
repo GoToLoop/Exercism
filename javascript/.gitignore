@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 jsdoc/
-docs/jsdoc
+docs/jsdoc/

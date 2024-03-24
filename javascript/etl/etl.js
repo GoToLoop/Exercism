@@ -1,8 +1,8 @@
 // @ts-check
 
 /**
- * @param {Record<number, string[]>} oldModel
- * @param {Record<string, number>} newNodel 
+ * @param {Object<number, string[]>} oldModel
+ * @param {Object<string, number>} newNodel
  */
 export function transform(oldModel, newNodel={}) {
   for (const score in oldModel) for (const letter of oldModel[score])

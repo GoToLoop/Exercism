@@ -1,4 +1,5 @@
 #!/bin/bash
+
 for d in ./*/ ; do
     jsdoc $d -c jsdoc.json -d docs/jsdoc/$(basename $d)
 done
