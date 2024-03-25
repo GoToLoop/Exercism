@@ -12,7 +12,7 @@ export class BankAccount {
 
   /**
    * @param {number} val
-   * @throws {ValueError} if bank account is closed or `money` is negative
+   * @throws {ValueError} if bank account is closed or `val` is negative
    */
   deposit(val) { return this.balance, val < 0 ? this.#err() : this.#op(val); }
 
