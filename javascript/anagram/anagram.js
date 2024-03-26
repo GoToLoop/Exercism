@@ -6,12 +6,12 @@
  * @param {string[]} words the array of anagram candidates for input `word`
  * @returns {string[]} an array of anagrams found in the `words` array
  */
-export function findAnagrams(word, words, sorted = sortWord(word)) {
-  return words.filter(w => sortWord(w) == sorted && noCase.compare(w, word)); }
+export const findAnagrams = (word, words, sorted = sortWord(word)) =>
+  words.filter(w => sortWord(w) == sorted && noCase.compare(w, word));
 
 /**
- * Sorts the characters of a given word in alphabetical order.
- * @param {string} w the word to sort and convert to lowercase
+ * Sorts the characters of a given word in alphabetical ascending order.
+ * @param {string} w the word to sort and convert to lowercase letters
  * @returns {string} the sorted lowercase version of the input word
  */
 export const sortWord = w => [ ...w.toLowerCase() ].sort().join('');
