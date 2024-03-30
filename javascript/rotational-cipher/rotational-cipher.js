@@ -2,7 +2,7 @@
 
 const ord = (ch='') => ch.charCodeAt(0), chr = String.fromCharCode,
       isUpper = (ch='') => !(ord(ch) & 0x20), LEN = 26, A = ord('A'),
-      ABC = Object.freeze(Array.from({ length: LEN }, (_, i) => chr(i + A)));
+      ABC = Array.from({ length: LEN }, (_, i) => chr(i + A)).join('');
 
 export function rotate(chars='', rot=0, cypher='') {
   for (const ch of chars) {
