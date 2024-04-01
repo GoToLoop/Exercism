@@ -59,7 +59,7 @@ function tallyMatchesPlayed(stats, { names }) {
 function tallyScores(stats, { teams, rivals, outcomes }) {
   for (const team in stats) stats[team].reset();
 
-  for (var res = 0, i = 0; i < outcomes.length; ++i)
+  for (var i = 0; i < outcomes.length; ++i)
     if (outcomes[i] == 2) stats[teams[i]].w++, stats[rivals[i]].l++;
     else if (outcomes[i] == 1) stats[teams[i]].d++, stats[rivals[i]].d++;
     else stats[teams[i]].l++, stats[rivals[i]].w++;
