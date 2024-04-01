@@ -8,22 +8,27 @@
 
 import { STATS, RESULTS, HEADER } from './stat';
 
-const { freeze, fromEntries } = Object, { from } = Array, { random } = Math,
+const
+  { freeze, fromEntries } = Object, { from } = Array, { random } = Math,
+  collator = Intl.Collator(),
 
-      create = (team='') => new STATS[ random() * STATS.length | 0 ](team),
-      parser = (tally='') => tally.split('\n').map( row => row.split(';') ),
+  create = (team='') => new STATS[ random() * STATS.length | 0 ](team),
+  parser = (tally='') => tally.split('\n').map( row => row.split(';') ),
 
-      strArr = (len=0) => /** @type {string[]} */ (Array(len).fill('')),
-      numArr = (len=0) => new Uint8Array(len), collator = Intl.Collator(),
+  strArr = (len=0) => /** @type {string[]} */ (Array(len).fill('')),
+  numArr = (len=0) => new Uint8Array(len),
 
-      result = (res='') => RESULTS.indexOf( /** @type {Outcome} */ (res) );
+  result = (res='') => RESULTS.indexOf( /** @type {Outcome} */ (res) );
 
-export function tournamentTally(tally='', table=toTableObj( parser(tally) )) {
+export function tournamentTally(tally='') {
   if (!tally) return HEADER;
 
-  const teamStats = createTeamStatsObj(table);
+  const
+    table = toTableObj( parser(tally) ),
+    teamStats = createTeamStatsObj(table);
 
-  tallyMatchesPlayed(teamStats, table); tallyScores(teamStats, table);
+  tallyMatchesPlayed(teamStats, table);
+  tallyScores(teamStats, table);
 
   return createTallyOutput(teamStats);
 }
