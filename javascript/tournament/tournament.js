@@ -10,6 +10,7 @@ import { STATS, RESULTS, HEADER } from './stat';
 
 const
   { freeze, fromEntries } = Object, { from } = Array, { random } = Math,
+
   collator = Intl.Collator(),
 
   create = (team='') => new STATS[ random() * STATS.length | 0 ](team),
