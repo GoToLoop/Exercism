@@ -20,3 +20,12 @@ export function decode(enc='', len=0, dec='', lengs=numArr(len--)) {
     idx += dir, dir *= bounce(idx, len); }
 
   return dec; }
+
+// function convertToJS(n, x) {
+//   return Math.round((2*n-2) * Math.abs((x/(2*n-2))
+//     - Math.floor((x/(2*n-2)) + 0.5))); }
+
+// fn rail_index(char_index: usize, rails: usize) ->
+// usize { let repeat_position = 2 * rails + 2;
+// (repeat_position * ((char_index + rails - 1) / repeat_position)).
+// abs_diff(rails) }
