@@ -9,39 +9,46 @@
  */
 function Node(v=NaN, p=this, n) { this.v = v, this.p = p, this.n = n; }
 
-Node.prototype.kill = function () {
+Node.prototype.kill = function () { // assigns undefined to both node ends
   return this.p = this.n = /** @type {*} */(void 0), this; }
 
-class Anchor { head = /** @type {Node=} */(void 0); tail = this.head; }
+class Anchor {head = /** @type {Node=} */(void 0); tail = this.head; size = 0;}
 
 export class LinkedList {
-  anchor = new Anchor; size = 0;
+  anchor = new Anchor; // container for 1st & last nodes, plus total of nodes
 
-  push(v=NaN) {
-    const { anchor: a } = this, newTail = (++this.size, new Node(v, a.tail));
+  push(v=NaN) { // appends a new value to the tail of the linked list
+    const { anchor: a } = this, newTail = (++a.size, new Node(v, a.tail));
     if (!a.head || !a.tail) return a.head = a.tail = newTail, this;
-    return a.tail = a.tail.n = newTail, this; }
+    return a.tail = a.tail.n = newTail, this; } // makes new node the last node
 
-  pop({ anchor: a } = this) {
-    if (!a.tail) return;
-    const { v } = a.tail, penultNode = a.tail.p;
-    return a.tail.kill(), (a.tail = penultNode).n = void 0, --this.size, v; }
+  pop({ anchor: a }=this) { // deletes & returns the value of the last node
+    if (!a.tail) return; // just returns undefined if there's no last node
+    const { v, p: penultNode } = a.tail; // penultimate node becomes last node 
+    return a.tail.kill(), (a.tail = penultNode).n = void 0, --a.size, v; }
 
-  shift({ anchor: a } = this) {
-    if (!a.head) return;
-    const { v } = a.head, secondNode = a.head.n;
-    if (secondNode) secondNode.p = a.head.p;
-    return a.head.kill(), a.head = secondNode, --this.size, v; }
+  shift({ anchor: a }=this) { // deletes & returns the value of the 1st node
+    if (!a.head) return; // just returns undefined if there's no 1st node
+    const { v, n: secondNode } = a.head; // 2nd node will become 1st node
 
-  unshift(v=NaN) {
+    // 2nd node no longer points to the about-to-be-deleted current head node:
+    if (secondNode) secondNode.p = a.head.p; // do that only if 2nd node exists 
+    return a.head.kill(), a.head = secondNode, --a.size, v; }
+
+  unshift(v=NaN) { // prepends a new value to the head of the linked list
     const { anchor: a } = this, newHead = new Node(v, a.head?.p, a.head);
-    if (++this.size, !a.head) return a.head = a.tail = newHead, this;
-    return a.head = a.head.p = newHead, this; }
+    if (++a.size, !a.head) return a.head = a.tail = newHead, this;
+    return a.head = a.head.p = newHead, this; } // makes new node the 1st node
 
-  delete(v=NaN, { anchor: a } = this, node = a.head) {
-    while (node) if (node.v == v) {
-      if (node.n) node.n.p = node.p, node.p.n = node.n;
-      else (a.tail = node.p).n = void 0;
-      return node.kill(), --this.size, v; } else node = node?.n; }
+  delete(v=NaN, { anchor: a }=this, node=a.head) {
+    while (node) if (node.v == v) { // node containing deleting value found!
+      if (node == a.head) return this.shift(); // deleting head/1st node
+      else if (!node.n) return this.pop(); // deleting tail/last node
 
-  count() { return this.size; } }
+      // Next node points to previous node of current node and vice-versa: 
+      node.n.p = node.p, node.p.n = node.n;
+      return node.kill(), --a.size, v; } // kill match node and decrease count
+
+    else node = node.n; } // searching for next node until 1 is undefined
+
+  count() { return this.anchor.size; } } // returns current number of nodes
