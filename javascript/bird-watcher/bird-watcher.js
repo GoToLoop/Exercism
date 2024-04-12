@@ -7,7 +7,7 @@
  * @param {number} visitCount current number of bird sights in one day
  * @returns {number} partial sum of bird sights since logs started
  */
-const birdVisitsCounter = (partialSum, visitCount) => partialSum + visitCount;
+const birdVisits = (partialSum, visitCount) => partialSum + visitCount;
 
 /**
  * Calculates the total bird count.
@@ -15,9 +15,7 @@ const birdVisitsCounter = (partialSum, visitCount) => partialSum + visitCount;
  * @param {number[]} birdsPerDay log of daily bird sightings in the garden
  * @returns {number} total bird count since logs started
  */
-export function totalBirdCount(birdsPerDay) {
-  return birdsPerDay.reduce(birdVisitsCounter);
-}
+export const totalBirdCount = birdsPerDay => birdsPerDay.reduce(birdVisits);
 
 /**
  * Calculates the total number of birds seen in a specific week.
@@ -27,8 +25,7 @@ export function totalBirdCount(birdsPerDay) {
  * @returns {number} birds counted in the given week
  */
 export function birdsInWeek(birdsPerDay, week) {
-  return totalBirdCount(birdsPerDay.slice(7 * (week - 1), 7 * week));
-}
+  return totalBirdCount(birdsPerDay.slice(7 * (week - 1), 7 * week)); }
 
 /**
  * Fixes the untracked hidden bird mistake by increasing the bird count by one
@@ -39,5 +36,4 @@ export function birdsInWeek(birdsPerDay, week) {
  */
 export function fixBirdCountLog(birdsPerDay) {
   for (var i = 0; i < birdsPerDay.length; i += 2) ++birdsPerDay[i];
-  return birdsPerDay;
-}
+  return birdsPerDay; }
