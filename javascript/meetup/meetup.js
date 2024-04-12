@@ -34,8 +34,8 @@ export function meetup(year, month, schedule, week) {
  * @param {Date} date - the date to be modified and returned
  * @param {number} week - 0-based indexed target day of the week (0-6)
  *
- * @returns {Date} the first upcoming date from the provided date that matches
- * the target day of the week
+ * @returns {Date} the first upcoming date from the provided `date` that
+ * matches the target day of the `week`
  */
 export function setDay(date, week) {
   return date.setDate(date.getDate() + (week - date.getDay() + 7) % 7), date; }
