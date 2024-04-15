@@ -8,9 +8,9 @@ export const Palindromes = { generate({ minFactor: min=0, maxFactor: max=0 }) {
 
   const minProds = /** @type {FactorPair[]} */([]), maxProds = [...minProds];
 
-  var minPal = Infinity, maxPal = -Infinity, prod = 0;
+  var minPal = Infinity, maxPal = -Infinity, prod = 0, i = 0, j = 0;
 
-  for (var i = min; i <= max; ++i) for (var j = i; j <= max; ++j) {
+  for (i = min; i <= max; ++i) for (j = i; j <= max; ++j) {
     if (!isPalindrome(prod = i * j)) continue;
 
     if (prod < minPal) minPal = prod, minProds.length = 0;
