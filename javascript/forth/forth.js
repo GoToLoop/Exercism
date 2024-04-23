@@ -1,25 +1,25 @@
 // @ts-check
 
-/** @typedef {Object<string, string>} Cmd */
+/** @typedef {Object<string, string>} Macro */
 
 var last = 0, penult = 0;
 
 export class Forth {
-  stack = /** @type {number[]} */([]); cmds = /** @type {Cmd} */({});
+  stack = /** @type {number[]} */([]); macros = /** @type {Macro} */({});
 
-  evaluate(exp='', {stack, cmds}=this) {
+  evaluate(exp='', {stack, macros}=this) {
     if ((exp = exp.toLowerCase())[0] == ':') return this.#define(exp);
 
     for (const cmd of exp.split(' '))
       if (isFinite(+cmd)) stack.push(+cmd | 0);
-      else if (cmds[cmd]) this.evaluate(cmds[cmd]);
+      else if (macros[cmd]) this.evaluate(macros[cmd]);
       else if (!this[cmd]?.()) throw Error('Unknown command'); return this; }
 
-  #define(exp='', {cmds}=this, idx=0) {
+  #define(exp='', {macros}=this, idx=0) {
     const [ cmd, ...args ] = exp.slice(2, -2).split(' ');
     if (isFinite(+cmd)) throw Error('Invalid definition');
-    for (const arg of args) args[idx++] = cmds[arg] || args[idx-1];
-    return cmds[cmd] = args.join(' '), this; }
+    for (const arg of args) args[idx++] = macros[arg] || arg;
+    return macros[cmd] = args.join(' '), this; }
 
   #empty(len=this.stack.length) { if (len < 2) throw Error('Stack empty'); }
 
