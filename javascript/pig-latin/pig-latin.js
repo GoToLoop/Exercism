@@ -24,7 +24,7 @@
 export function translate(text='', words=text.split(' '), latin='') {
   for (var i = 0; i < words.length; ++i) for (const rule in RULES)
     if (latin = RULES[rule](words[i])) { words[i] = latin; break; }
-  return words.join(' '); }
+  return console.info(text, latin = words.join(' ')), latin; }
 
 const VOWEL_PATTERN = Object.freeze(/[aeiou]+|yt|xr/), AY = 'ay';
 
