@@ -3,6 +3,24 @@
 ///////////////////////////// * Callback Types * /////////////////////////////
 
 /**
+ * This function performs an asynchronous fetch operation. It takes an input
+ * `value` and a handler `callback` function. When the fetch operation is
+ * complete, it calls that `callback` function passing that result `value` as
+ * its 2nd argument by default, or some other value. If the operation fails,
+ * this fetcher passes an Error instance to the handler instead as 1st arg.
+ *
+ * @template T
+ * @callback Fetcher
+ *
+ * @arg {T} value The input value for the fetch operation.
+ *
+ * @arg {Handler<T>} callback The handler callback to be called when the fetch
+ * operation is complete. The fetcher is supposed to pass `value` as handler's
+ * 2nd argument as the operations's final result, but it's free to choose
+ * something else.
+ */
+
+/**
  * This is a callback function that handles the result of an asynchronous
  * operation. It follows the Node.js convention of taking an error object as
  * the first argument and the result data as the second argument.
@@ -10,26 +28,8 @@
  * @template T
  * @callback Handler
  *
- * @arg {Error?} error An Error object if an error occurred, null otherwise.
- * @arg {T=} data The data to be returned by the asynchronous operation.
- *
- * @returns {void} This callback does not return a value.
- */
-
-/**
- * This function performs an asynchronous fetch operation. It takes an input
- * `value` and a `callback` function. When the fetch operation is complete,
- * it calls the `callback` function passing that `value` as its 2nd argument
- * by default, or some other `value`.
- *
- * @template T
- * @callback Fetcher
- *
- * @arg {T} value The input default value for the fetch operation.
- * @arg {Handler<T>} callback The callback to be called when the fetch
- * operation is complete.
- *
- * @returns {void} This function does not return a value.
+ * @arg {Error?=} error An Error object if an error occurred, null otherwise.
+ * @arg {T=} result The result to be passed by the asynchronous operation.
  */
 
 /**
@@ -39,16 +39,24 @@
  * @template T
  * @callback Promisified
  *
- * @arg {T} value The input value for the operation.
+ * @arg {T} value The input value for the operation and likely also the final
+ * result for the Promise to be resolved with.
+ *
  * @returns {Promise<T>} Promise that resolves w/ the result of the operation.
  */
 
 ////////////////////////////// * promisify() * ///////////////////////////////
 
 /**
- * This function takes a fetch operation and returns a promisified version of
- * that operation. The returned function takes the same input as the original
- * fetch operation and returns a Promise that resolves with the result of it.
+ * This util function takes a fetcher operation function as its argument, and
+ * then returns a promisified version of it. This returned modified function
+ * takes the same input `value` as we would have directly invoked the original
+ * fetcher function; but now it returns a Promise object that will resolve w/
+ * the result of the asynchronous operation, having `value` as default result.
+ * BtW, this returned Promise replaces the need of passing a handler callback
+ * as 2nd argument to the original fetcher function. Instead, promisify() will
+ * create its own customized handler callback, which will later be passed to
+ * the original fetcher, which will then either resolve or reject the Promise.
  *
  * @template T
  * @param {Fetcher<T>} fetcher The fetch operation to be promisified.
@@ -56,19 +64,19 @@
  */
 export function promisify(fetcher) {
   return value => new Promise((resolve, reject) => fetcher(value,
-    (error, data=value) => error ? reject(error) : resolve(data))); }
+    (error, result=value) => error ? reject(error) : resolve(result))); }
 
 ///////////////////////////////// * all() * //////////////////////////////////
 
 /**
  * Creates a Promise that is resolved with an array of results when all of
  * the provided Promises resolve, or rejected when any Promise is rejected.
- * 
+ *
  * @template T
  * @alias Promise.all
  * @overload
  *
- * @param {Iterable<T | PromiseLike<T>>} promises An array of promises.
+ * @param {Iterable<T | PromiseLike<T>>} promises An iterable of promises.
  *
  * @returns {Promise<Awaited<T>[]>} A new Promise that resolves as an array of
  * results when all the `promises` in the provided array have been resolved.
@@ -76,11 +84,11 @@ export function promisify(fetcher) {
 
 /**
  * @overload
- * @returns {Promise<undefined>}
+ * @returns {typeof VOID} A readonly Promise that resolves as undefined.
  */
 
 /**
- * @param {Iterable<T | PromiseLike<T>>} [promises] An array of promises.
+ * @param {Iterable<T | PromiseLike<T>>} [promises] An iterable of promises.
  *
  * @returns {Promise<Awaited<T>[] | undefined>} A new Promise that resolves
  * as an array of results of type T when all the `promises` in the provided
@@ -95,8 +103,8 @@ export function all(promises) {
   if (!len) return Promise.resolve(results); // resolves as an empty array
 
   return new Promise((ok, bad, count=0) => {
-    for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(val =>
-      (results[i] = val, ++count == len && ok(results)), bad); }); }
+    for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(
+      val => (results[i] = val, ++count == len && ok(results)), bad); }); }
 
 ////////////////////////////// * allSettled() * //////////////////////////////
 
@@ -108,22 +116,22 @@ export function all(promises) {
  * @alias Promise.allSettled
  * @overload
  *
- * @param {Iterable<T | PromiseLike<T>>} promises An array of Promises.
+ * @param {Iterable<T | PromiseLike<T>>} promises An iterable of Promises.
  *
- * @returns {Promise<Awaited<T | Error>[]>} A new Promise that resolves with
+ * @returns {Promise<Awaited<T>[] | Error[]>} A new Promise that resolves with
  * an array of results of type T or Error, when all of the provided `promises`
  * have been either resolved or rejected.
  */
 
 /**
  * @overload
- * @returns {Promise<undefined>} A new Promise that resolves as undefined.
+ * @returns {typeof VOID} A readonly Promise that resolves as undefined.
  */
 
 /**
  * @param {Iterable<T | PromiseLike<T>>} [promises] An array of Promises.
  *
- * @returns {Promise<Awaited<T | Error>[] | undefined>} A new Promise that
+ * @returns {Promise<Awaited<T>[] | Error[] | undefined>} A new Promise that
  * resolves with an array of results of type T or Error, when all of the
  * provided `promises` have been either resolved or rejected.
  */
@@ -131,14 +139,14 @@ export function allSettled(promises) {
   if (!promises) return VOID; // resolves as undefined
 
   const promiseArr = Object.freeze([...promises]), len = promiseArr.length,
-        results = /** @type Awaited<T | Error>[] */(Array(len).fill(null));
+        results = /** @type Awaited<T>[] | Error[] */(Array(len).fill(null));
 
   if (!len) return Promise.resolve(results); // resolves as an empty array
 
   return new Promise((ok, _, count=0) => {
-    for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(val =>
-      (results[i] = val, ++count == len && ok(results)), err =>
-      (results[i] = err, ++count == len && ok(results))); }); }
+    for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(
+      val => (results[i] = val, ++count == len && ok(results)),
+      err => (results[i] = err, ++count == len && ok(results))); }); }
 
 ///////////////////////////////// * race() * /////////////////////////////////
 
@@ -156,23 +164,23 @@ export function allSettled(promises) {
  * @alias Promise.race
  * @overload
  *
- * @param {Iterable<T | PromiseLike<T>>} promises An array of promises.
+ * @param {Iterable<T | PromiseLike<T>>} promises An iterable of promises.
  *
- * @returns {Promise<Awaited<T>>} A new Promise that is settled with the
- * value of the first Promise that is resolved or rejected.
+ * @returns {Promise<Awaited<T>>} A new Promise that is settled with
+ * the value of the first Promise that is resolved or rejected.
  */
 
 /**
  * @overload
- * @returns {Promise<undefined>} A new Promise that resolves as undefined.
+ * @returns {typeof VOID} A readonly Promise that resolves as undefined.
  */
 
 /**
  * @param {Iterable<T | PromiseLike<T>> | never[]} [promises]
  * An array or iterable of promises.
  *
- * @returns {Promise<Awaited<T> | never[] | undefined>} A new Promise that is
- * settled with the value of the first Promise that is resolved or rejected.
+ * @returns {Promise<Awaited<T> | never[] | undefined>} A Promise that
+ * is settled w/ the value of the 1st Promise that is resolved or rejected.
  */
 export function race(promises) {
   if (!promises) return VOID; // resolves as undefined
@@ -200,21 +208,21 @@ export function race(promises) {
  *
  * @param {Iterable<T | PromiseLike<T>>} promises An array of promises.
  *
- * @returns {Promise<Awaited<T> | Error[]>} A new Promise that is resolved
- * with the value of the first Promise that is resolved, or it's rejected
- * as an array of all of the failed `promises`.
+ * @returns {Promise<Awaited<T>>} A new Promise that is resolved with the
+ * value of the first Promise that is resolved, or it's rejected as an array
+ * of all of the failed `promises`.
  */
 
 /**
  * @overload
- * @returns {Promise<undefined>} A new Promise that resolves as undefined.
+ * @returns {typeof VOID} A readonly Promise that resolves as undefined.
  */
 
 /**
  * @param {Iterable<T | PromiseLike<T> | never[]>} [promises]
  * An array or iterable of promises.
  *
- * @returns {Promise<Awaited<T> | Error[] | never[] | undefined>}
+ * @returns {Promise<Awaited<T> | never[] | undefined>}
  * A new Promise that is resolved with the value of the first Promise that is
  * resolved, or it's rejected as an array of all of the failed `promises`.
  */
@@ -224,7 +232,7 @@ export function any(promises) {
   const promiseArr = Object.freeze([...promises]), len = promiseArr.length,
         fails = /** @type Error[] */(Array(len).fill(null));
 
-  if (!len) return Promise.resolve(fails); // resolves as an empty array
+  if (!len) return Promise.resolve(/** @type {never[]} */(fails));
 
   return new Promise((ok, bad, count=0) => {
     for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(val =>
@@ -232,6 +240,7 @@ export function any(promises) {
 
 //////////////////////////////////////////////////////////////////////////////
 
+/** A frozen Promise that resolves with the result `undefined`. */
 const VOID = Object.freeze(Promise.resolve(void 0));
 
 //////////////////////////////////////////////////////////////////////////////
