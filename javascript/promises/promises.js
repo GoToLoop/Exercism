@@ -235,8 +235,8 @@ export function any(promises) {
   if (!len) return Promise.resolve(/** @type {never[]} */(fails));
 
   return new Promise((ok, bad, count=0) => {
-    for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(val =>
-      ok(val), err => (fails[i] = err, ++count == len && bad(fails))); }); }
+    for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(ok,
+      err => (fails[i] = err, ++count == len && bad(fails))); }); }
 
 //////////////////////////////////////////////////////////////////////////////
 
