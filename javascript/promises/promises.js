@@ -109,8 +109,8 @@ export function all(promises) {
 ////////////////////////////// * allSettled() * //////////////////////////////
 
 /**
- * Creates a Promise that is resolved with an array of results when all of the
- * provided Promises resolve or reject.
+ * Creates a Promise that never fails and is resolved with an array of results
+ * when all of the provided Promises resolve or reject.
  *
  * @template T
  * @alias Promise.allSettled
@@ -143,10 +143,11 @@ export function allSettled(promises) {
 
   if (!len) return Promise.resolve(results); // resolves as an empty array
 
-  return new Promise((ok, _, count=0) => {
-    for (let i = 0; i < len; ++i) Promise.resolve(promiseArr[i]).then(
-      val => (results[i] = val, ++count == len && ok(results)),
-      err => (results[i] = err, ++count == len && ok(results))); }); }
+  return new Promise((ok, _, count=0) => { for (let i = 0; i < len; ++i) {
+    /** @param {typeof results[number]} val */
+    const addVal = val => (results[i] = val, ++count == len && ok(results));
+
+    Promise.resolve(promiseArr[i]).then(addVal, addVal); } }) }
 
 ///////////////////////////////// * race() * /////////////////////////////////
 
