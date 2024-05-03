@@ -109,8 +109,8 @@ export function all(promises) {
 ////////////////////////////// * allSettled() * //////////////////////////////
 
 /**
- * Creates a Promise that never fails and is resolved with an array of results
- * when all of the provided Promises resolve or reject.
+ * Creates a Promise that never rejects and it is resolved with an array of
+ * results and/or errors when all of the provided Promises resolve or reject.
  *
  * @template T
  * @alias Promise.allSettled

@@ -2,7 +2,7 @@
 
 import { promisify, all, allSettled, race, any } from './promises';
 
-const xtest = test.skip;
+globalThis.xtest ||= test.skip;
 
 /**
  * @template T
