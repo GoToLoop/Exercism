@@ -22,7 +22,7 @@ export const revokeTicket = visitor => (visitor.ticketId = null, visitor);
 /**
  * Determines the status a ticket has in the ticket tracking object.
  *
- * @param {Object<string, string | null>} tickets object tracking all tickets
+ * @param {Object<string, string?>} tickets object tracking all tickets
  * @param {string} ticketId the ID of the ticket to check
  * @returns {string} ticket status
  */
@@ -35,7 +35,7 @@ export function ticketStatus(tickets, ticketId, _status=tickets[ticketId]) {
  * Determines the status a ticket has in the ticket tracking object
  * and returns a simplified status message.
  *
- * @param {Object<string, string | null>} tickets object tracking all tickets
+ * @param {Object<string, string?>} tickets object tracking all tickets
  * @param {string} ticketId the ID of the ticket to check
  * @returns {string} ticket status
  */

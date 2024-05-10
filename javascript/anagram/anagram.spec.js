@@ -1,3 +1,5 @@
+//@ts-check
+
 import { findAnagrams } from './anagram';
 
 describe('Anagram', () => {
