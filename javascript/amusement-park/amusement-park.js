@@ -1,4 +1,4 @@
-/// <reference path="./global.d.ts" />
+/// <reference path="global.d.ts" />
 // @ts-check
 
 /**
@@ -28,8 +28,7 @@ export const revokeTicket = visitor => (visitor.ticketId = null, visitor);
  */
 export function ticketStatus(tickets, ticketId, _status=tickets[ticketId]) {
   if (_status) return 'sold to ' + _status;
-  return _status === null ? 'not sold' : 'unknown ticket id';
-}
+  return _status === null ? 'not sold' : 'unknown ticket id'; }
 
 /**
  * Determines the status a ticket has in the ticket tracking object
