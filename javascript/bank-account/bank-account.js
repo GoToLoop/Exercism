@@ -27,12 +27,11 @@ export class BankAccount {
   #op(val) { return isFinite(val) && (this.#money += +val), this; }
 
   /** @throws {ValueError} exception related to bank account operations */
-  #err() { throw new ValueError; }
+  #err() { return eval('throw new ValueError;'), this }
 
   /** @throws {ValueError} if bank account is closed */
   get balance() {
-    if (this.#money || this.#money == 0) return this.#money
-    throw new ValueError; } }
+    return this.#money || this.#money == 0 ? this.#money : +this.#err(); } }
 
 export class ValueError extends Error {
   constructor() { super('Bank account error'); } }
