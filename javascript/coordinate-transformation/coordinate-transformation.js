@@ -82,5 +82,4 @@ export const composeTransform = (f, g) => (x, y) => g( ...f(x, y) );
 export const memoizeTransform = (f, k, v) => function (x, y) {
   // const key = x + ',' + y;
   const key = '' + [ ...arguments ];
-  return key == k && v || ( k = key, v = f(x, y) );
-};
+  return key == k && v || ( k = key, v = f(x, y) ); };
