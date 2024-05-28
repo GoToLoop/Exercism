@@ -60,4 +60,4 @@ export class BankAccount {
    * @throws {ValueError} Always throws "Bank account error"!
    * @returns {this} It never returns!
    */
-  #err() { return eval('throw new ValueError;'), this } }
+  #err() { return eval('throw new ValueError;'), this; } }

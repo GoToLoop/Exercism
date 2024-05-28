@@ -1,3 +1,5 @@
+// @ts-check
+
 import { totalBirdCount, birdsInWeek, fixBirdCountLog } from './bird-watcher';
 
 describe('totalBirdCount', () => {
@@ -74,5 +76,5 @@ describe('fixBirdCountLog', () => {
 });
 
 function randomArray(length) {
-  return Array.from({ length: length }, () => Math.floor(Math.random() * 8));
+  return Array.from({ length }, () => Math.random() * 8 || 0);
 }
