@@ -1,7 +1,7 @@
 // @ts-check
 
 const wrap = (v=0, m=1440) => (~~v % (m |= 0) + m) % m,
-      pad = v => ('' + v).padStart(2, '0');
+      pad = (/** @type {*} */ v) => ('' + v).padStart(2, '0');
 
 export class Clock {
   constructor(h=0, m=0) { this.m = wrap(~~h*60 + ~~m); }
