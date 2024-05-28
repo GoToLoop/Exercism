@@ -1,37 +1,63 @@
 // @ts-check
 
+/** Custom error class for bank account-related exceptions. */
+export class ValueError extends Error {
+  constructor() { super('Bank account error'); } }
+
+/** Represents a bank account. */
 export class BankAccount {
+  /** The amount of money in the bank account. */
   #money = NaN;
 
-  /** @throws {ValueError} if bank account is already active */
-  open(val=this.#money) {
-    return val || val == 0 ? this.#err() : this.#money = 0, this; }
+  /**
+   * Getter for the balance of the bank account stored in `#money`.
+   * @throws {ValueError} if the bank account is closed.
+   * @returns {number} The account balance.
+   */
+  get balance() { return isFinite(this.#money) ? this.#money : +this.#err(); }
 
-  /** @throws {ValueError} if bank account is closed */
+  /**
+   * Activates the bank account.
+   * @throws {ValueError} if the bank account is already active.
+   * @returns {this} A ready-to-use bank account.
+   */
+  open() { return isFinite(this.#money) ? this.#err() : this.#money = 0, this; }
+
+  /**
+   * Closes the bank account.
+   * @throws {ValueError} if the bank account has already been closed.
+   * @returns {this} A deactivated bank account.
+   */
   close() { return this.balance, this.#money = NaN, this; }
 
   /**
-   * @param {number} val
-   * @throws {ValueError} if bank account is closed or `val` is negative
+   * Deposits funds into the bank account.
+   * @param {number} val The amount to deposit.
+   * @throws {ValueError} if the bank account is closed or `val` is negative.
+   * @returns {this} The updated bank account.
    */
   deposit(val) { return this.balance, val < 0 ? this.#err() : this.#op(val); }
 
   /**
-   * @param {number} val
-   * @throws {ValueError} if bank account is closed or not enough funds
+   * Withdraws funds from the bank account.
+   * @param {number} val The amount to withdraw.
+   * @throws {ValueError} if the bank account is closed or `val` is negative
+   * or not enough funds.
+   * @returns {this} The updated bank account.
    */
   withdraw(val) {
-    return val < 0 || this.balance < val ? this.#err() : this.#op(-val); }
+    return this.balance < val || val < 0 ? this.#err() : this.#op(-val); }
 
-  /** @param {number} val */
-  #op(val) { return isFinite(val) && (this.#money += +val), this; }
+  /**
+   * Performs an account operation (deposit or withdrawal).
+   * @param {number} val The value to add or subtract.
+   * @returns {this} The updated bank account.
+   */
+  #op(val) { return isFinite(val) && (this.#money += val), this; }
 
-  /** @throws {ValueError} exception related to bank account operations */
-  #err() { return eval('throw new ValueError;'), this }
-
-  /** @throws {ValueError} if bank account is closed */
-  get balance() {
-    return this.#money || this.#money == 0 ? this.#money : +this.#err(); } }
-
-export class ValueError extends Error {
-  constructor() { super('Bank account error'); } }
+  /**
+   * Throws a `ValueError` related to bank account operations.
+   * @throws {ValueError} Always throws "Bank account error"!
+   * @returns {this} It never returns!
+   */
+  #err() { return eval('throw new ValueError;'), this } }
