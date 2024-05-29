@@ -21,7 +21,7 @@ export const setItem = (cards, position, replacementCard) =>
   (cards[position] = replacementCard, cards);
 
 /**
- * Insert newCard at the end of the cards array.
+ * Insert `newCard` at the end of the `cards` array.
  *
  * @param {number[]} cards array of card numbers ranging from 1 to 10
  * @param {number} newCard card number to be added at `cards` array's tail
@@ -30,7 +30,7 @@ export const setItem = (cards, position, replacementCard) =>
 export const insertItemAtTop = (cards, newCard) => (cards.push(newCard), cards);
 
 /**
- * Remove the card at the 0-based position.
+ * Remove the card at the 0-based `position`.
  *
  * @param {number[]} cards array of card numbers ranging from 1 to 10
  * @param {number} position index of the card number to be removed
