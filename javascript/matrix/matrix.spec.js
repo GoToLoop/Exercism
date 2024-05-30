@@ -1,3 +1,5 @@
+// @ts-check
+
 import { Matrix } from './matrix';
 
 describe('Matrix', () => {

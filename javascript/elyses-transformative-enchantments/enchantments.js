@@ -12,14 +12,13 @@ export const seeingDouble = deck => deck.map(card => card << 1);
  * @param {number[]} deck
  * @returns {number[]} deck with triplicate threes
  */
-export function threeOfEachThree(deck, idx=0, threes=[ 3, 3, 3 ]) {
+export function threeOfEachThree(deck, idx=0, threes=Object.freeze([3, 3, 3])) {
   //while ( ~(idx = deck.indexOf(3, idx)) ) deck.splice(idx, 0, 3, 3), idx += 3;
   //return deck; }
-  return deck.flatMap( card => card == 3 && threes || card ); }
+  return deck.flatMap(card => card == 3 && threes || card); }
 
 /**
- * Extracts the middle two cards from a deck.
- * Assumes a deck is always 10 cards.
+ * Extracts the middle two cards from a deck. Assumes a deck is always 10 cards.
  * @param {number[]} deck of 10 cards
  * @returns {number[]} new deck with only two middle cards
  */
@@ -30,9 +29,8 @@ export const middleTwo = deck => deck.slice(4, 6);
  * @param {number[]} deck with even number of cards
  * @returns {number[]} transformed deck
  */
-
-export const sandwichTrick = deck => deck.splice( (deck.length >> 1) - 1, 0,
-  deck.pop() || 0, deck.shift() || 0 ) && deck;
+export const sandwichTrick = deck => deck.splice((deck.length >> 1) - 1, 0,
+  deck.pop() || 0, deck.shift() || 0) && deck;
 
 /**
  * Removes every card from the deck except 2s.

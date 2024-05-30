@@ -1,3 +1,5 @@
+// @ts-check
+
 import { toRna } from './rna-transcription';
 
 describe('Transcription', () => {
