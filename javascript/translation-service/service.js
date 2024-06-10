@@ -67,11 +67,9 @@ export class TranslationService {
    * @throws {BadRequest} when type of passed `text` isn't `string`
    */
   premium(text, quality, {api} = this) {
-    const checker = (/** @type {Translation} */t) => t.quality >= quality ?
-      t.translation : Promise.reject(new QualityThresholdNotMet(text));
-
-    return api.fetch(text).then(checker, _ => this.request(text).then(
-      _ => api.fetch(text).then(checker))); }}
+    return api.fetch(text).catch(_ => this.request(text).then(_ =>
+      api.fetch(text))).then(t => t.quality >= quality ? t.translation : 
+      Promise.reject(new QualityThresholdNotMet(text))); }}
 
 /**
  * This error is used to indicate a translation was found, but its quality does
