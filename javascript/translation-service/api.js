@@ -143,4 +143,4 @@ function makeRandomError() {
 }
 
 /** Represents an error when a request is made with a wrong argument type. */
-class BadRequest extends Error { constructor(message) { super(message); } }
+class BadRequest extends Error { constructor(message='') { super(message); } }
