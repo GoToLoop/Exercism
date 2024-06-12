@@ -29,7 +29,7 @@ export const removeEmoji = msg => msg.replace(RegExp('emoji\\d+', 'g'), '');
  * @returns {string} the chatbot's response to the phone's validation
  */
 export const checkPhoneNumber = phone =>
-  /\(\+\d\d\)\s(\d{3}-){2}\d{3}/.test(phone) && MSGS[0] || MSGS[1] + phone;
+  /\(\+\d\d\)\s(?:\d{3}-){2}\d{3}/.test(phone) && MSGS[0] || MSGS[1] + phone;
 
 /**
  * Given a certain response from the user, help the chatbot get only the URLs.
@@ -37,7 +37,7 @@ export const checkPhoneNumber = phone =>
  * @param {string} userInput a string containing simple URLs to capture
  * @returns {?string[]} all possible URLs the user may have answered
  */
-export const getURL = userInput => userInput.match(/\w+(\.\w+)+/g);
+export const getURL = userInput => userInput.match(/\w+(?:\.\w+)+/g);
 
 /**
  * Greet the user using the full name data from the profile.
