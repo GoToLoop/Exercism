@@ -3,11 +3,7 @@
 # File last updated on 2023-07-20
 
 import unittest
-
-from armstrong_numbers import (
-    is_armstrong_number,
-)
-
+from armstrong_numbers import is_armstrong_number
 
 class ArmstrongNumbersTest(unittest.TestCase):
     def test_zero_is_an_armstrong_number(self):
