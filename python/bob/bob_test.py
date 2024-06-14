@@ -3,11 +3,7 @@
 # File last updated on 2023-07-20
 
 import unittest
-
-from bob import (
-    response,
-)
-
+from bob import response
 
 class BobTest(unittest.TestCase):
     def test_stating_something(self):
