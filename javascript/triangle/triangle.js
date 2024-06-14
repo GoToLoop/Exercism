@@ -13,6 +13,4 @@ export class Triangle {
 
   get isScalene() { return this.isValid() && this.uniques.size == 3; }
 
-  isValid() {
-    const [ a, b, c ] = this.sides;
-    return a * b * c != 0 && a + b >= c; } }
+  isValid() { const [a, b, c] = this.sides; return a && b && c && a + b >= c; }}

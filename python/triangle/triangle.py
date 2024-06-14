@@ -3,8 +3,7 @@ from collections.abc import Sequence, Callable
 def valid_triangle(triangle_type_checker: Callable[[Sequence[float]], bool]):
     def inner_checker(sides: Sequence[float]):
         a, b, c = (sides := sorted(map( abs, sides[:3] )))
-        return a * b * c != 0 and a + b >= c and triangle_type_checker(sides)
-
+        return a and b and c and a + b >= c and triangle_type_checker(sides)
     return inner_checker
 
 def equilateral(sides: Sequence[float]):
