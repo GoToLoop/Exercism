@@ -18,8 +18,7 @@ def is_criticality_balanced(temperature: float, neutrons_emitted: float):
     return (
         temperature < KELVIN and
         neutrons_emitted > NEUTRONS_BY_SEC and
-        temperature * neutrons_emitted < KELVIN_TIMES_NEUTRONS_BY_SEC
-    )
+        temperature * neutrons_emitted < KELVIN_TIMES_NEUTRONS_BY_SEC )
 
 
 BANDS = (80, 'green'), (60, 'orange'), (30, 'red'), (0, 'black')
@@ -53,8 +52,7 @@ def reactor_efficiency(voltage: float, current: float, max_power: float):
     raise ValueError('Efficiency percentage is less than 0%')
 
 
-STATUS = 'LOW', 'NORMAL', 'DANGER'
-LOW = 90
+STATUS = 'LOW', 'NORMAL', 'DANGER'; LOW = 90
 
 def fail_safe(temperature: float, neutrons_per_second: float, threshold: float):
     """Assess and return status code for the reactor.
@@ -69,11 +67,8 @@ def fail_safe(temperature: float, neutrons_per_second: float, threshold: float):
     3. 'DANGER' -> `temp. * neutrons/s` isn't in the above-stated ranges.
     """
 
-    prod = temperature * neutrons_per_second
-    percent = threshold / 100
-
-    low = LOW * percent
-    normal = (LOW + 20) * percent
+    prod = temperature * neutrons_per_second; percent = threshold / 100
+    low = LOW * percent; normal = (LOW + 20) * percent
 
     if prod < low : return STATUS[0]
     if low <= prod <= normal: return STATUS[1]
