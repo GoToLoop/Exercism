@@ -67,7 +67,7 @@ export class TranslationService {
    * @throws {BadRequest} when type of passed `text` isn't `string`
    */
   premium(text, quality, {api} = this) {
-    return api.fetch(text).catch(_ => this.request(text).then(_ =>
+    return api.fetch(text).catch(_ => this.request(text).then(() =>
       api.fetch(text))).then(t => t.quality >= quality ? t.translation : 
       Promise.reject(new QualityThresholdNotMet(text))); }}
 
