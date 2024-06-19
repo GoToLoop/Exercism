@@ -1,2 +1,1 @@
-def is_isogram(s: str):
-    return len(t := tuple(filter( str.isalpha, s.lower() ))) == len(set(t))
+is_isogram = lambda s: len(t:=(*filter(str.isalpha, s.lower()),)) == len(set(t))
