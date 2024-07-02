@@ -1,10 +1,10 @@
 """Functions to help play and score a game of Blackjack.
 
-How to play blackjack:    https://bicyclecards.com/how-to-play/blackjack/
-"Standard" playing cards: https://en.wikipedia.org/wiki/Standard_52-card_deck
+How to play blackjack:    https://BicycleCards.com/how-to-play/blackjack/
+"Standard" playing cards: https://en.Wikipedia.org/wiki/Standard_52-card_deck
 """
 
-DECK = {**{str(i): i for i in range(2, 11)}, **{'A':1, 'J':10, 'Q':10, 'K':10}}
+DECK = {'A': 1} | {str(i): i for i in range(2, 11)} | {c: 10 for c in 'JQK'}
 
 value_of_card = lambda card='A': DECK[card.strip().upper()]
 """Determine the scoring value of a card.
@@ -47,7 +47,7 @@ def value_of_ace(a: str, b: str):
     return int(1 in (x := DECK[a], y := DECK[b])) or (x + y + 11 < 22) * 10 + 1
 
 
-is_blackjack = lambda a='A', b='K', JACK={ 1, 10 }: JACK == { DECK[a], DECK[b] }
+is_blackjack = lambda a='A', b='K', JACK={1, 10}: JACK == {DECK[a], DECK[b]}
 """Determine if the hand is a 'natural' or 'blackjack'.
 
 :params a, b: str - cards dealt. See below for values.
