@@ -1,1 +1,1 @@
-REV = slice(None, None, -1); reverse = lambda text='': text[REV]
+reverse, REV = lambda text='': text[REV], slice(None, None, -1)
