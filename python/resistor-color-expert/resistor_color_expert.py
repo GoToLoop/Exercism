@@ -24,7 +24,6 @@ def resistor_label(colors: list[str]):
 
     val: int | float = int(''.join(map(str, n)) + '0' * mag)
 
-    for u in UNITS:
-        if val >= u: val /= u; unit = UNITS[u]; break
+    any((val := val / u) and (unit := UNITS[u]) for u in UNITS if val >= u)
 
     return f'{int(val) if val == int(val) else val} {unit}ohms ±{tol}%'
