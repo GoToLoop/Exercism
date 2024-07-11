@@ -3,7 +3,7 @@ UNITS, BANDS = ("", "kilo", "mega", "giga"), ( "black", "brown", "red",
 
 # Gets the corresponding BANDS indices of the first three colors in the input
 # list as a tuple of resistance values:
-def vals(colors: list[str]): return *(map(BANDS.index, colors[:3])),
+def vals(colors: list[str]): return *map(BANDS.index, colors[:3]),
 
 def label(c: list[str]):
     """Calculates the resistance value based on the input color bands.
