@@ -55,7 +55,7 @@ updated string annotations.
 
 ## Line-by-Line Explanation
 
-- `def annotate(board: list[str], chars=''):`:
+- `def annotate(board: list[str], *, chars=''):`:
   - The function takes a list of strings (`board`), where each string represents
 a row of it.
   - Those strings can only contain spaces or asterisks (`*`) characters.
@@ -70,7 +70,6 @@ function!
     - Ensures that each row contains only asterisks or spaces.
     - For that, it invokes `strip(' *')` expecting it to return an empty string
 (which is a "falsy" value).
-
 
 - `raise ValueError('The board is invalid with current input.')`:
   - Raises a `ValueError` when `any()` of the 2 checks within the generator

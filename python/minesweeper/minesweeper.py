@@ -1,4 +1,4 @@
-def annotate(board: list[str], chars=''):
+def annotate(board: list[str], *, chars=''):
     if any(len(row) != len(board[0]) or row.strip(' *') for row in board):
         raise ValueError('The board is invalid with current input.')
 
