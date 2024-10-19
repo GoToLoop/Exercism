@@ -2,7 +2,7 @@
 
 const BRACKETS = '{}[]()', isEven = (n=0) => !(n & 1);
 
-export function isPaireds(str='', stack='', idx=-1) { // stack of open brackets
+export function isPaired(str='', stack='', idx=-1) { // stack of open brackets
   for (const ch of str)  if ( ~(idx = BRACKETS.indexOf(ch)) ) // found bracket
     if (isEven(idx)) stack += BRACKETS[idx]; // even is open bracket; so add it
     else if (stack.at(-1) == BRACKETS[idx - 1]) stack = stack.slice(0, -1);

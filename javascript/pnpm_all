@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for d in ./*/ ; do
+    echo -e "\nWorking on directory: $d"
+    pnpm -C $d i
+done

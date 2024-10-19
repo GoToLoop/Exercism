@@ -1,9 +1,5 @@
-def is_paired(code: str, s: list[str]=[], OPENS='{[(', CLOSES='}])'):
-    for ch in print(code) or s.clear() or code:
-        if ch in OPENS: s += ch
-
-        elif ch in CLOSES:
-            if not s or CLOSES.index(ch) != OPENS.index(s[-1]): return False
-            s.pop()
-
+def is_paired(brackets: str, s: list[str]=[], A='{[(', B='}])'):
+    for c in print(brackets) or s.clear() or brackets:
+        if c in A: s += c
+        elif c in B and (not s or B.index(c) != A.index(s.pop())): return False
     return not s

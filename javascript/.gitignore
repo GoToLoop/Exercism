@@ -129,5 +129,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-docs/jsdoc/
+pnpm-lock.yaml
 
+docs/jsdoc/
