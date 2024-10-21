@@ -5,7 +5,8 @@
   "scripts": {
     "docs": "./docs_gen",
     "doc": "./doc",
-    "all": "./pnpm_all"
+    "all": "./pnpm_all",
+    "kill": "./kill_all"
   },
   "devDependencies": {
     "clean-jsdoc-theme": "^4",

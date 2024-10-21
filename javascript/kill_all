@@ -1,0 +1,3 @@
+#!/bin/sh
+find . -name "pnpm-lock.yaml" -type f -exec rm -f '{}' +
+find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
