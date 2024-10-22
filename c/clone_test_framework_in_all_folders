@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Subfolder name in root folder to be targeted by symlinks:
+folder=test-framework
+
+# Its corresponding relative path to be used for the symlink creation:
+target=../$folder
+
+# Loop over all subfolders to find all sub-subfolders named "test-framework":
+for d in ./*/ ; do
+    # Log current subfolder being processed:
+    echo $d
+
+    # Cache current sub-subfolder path:
+    sub=$d$folder
+
+    # Check if current subfolder contains a "test-framework" inside it:
+    if [ -d $sub ]; then
+        # Delete it if it's not a symlink & replace it w/ the symlink folder:
+        [ ! -L $sub ] && rm -rf $sub && ln -s $target $sub
+
+    # If it doesn't, and we aren't looping the target folder, add the symlink:
+    elif [ $(basename $d) != $folder ]; then ln -s $target $sub
+
+    fi
+done

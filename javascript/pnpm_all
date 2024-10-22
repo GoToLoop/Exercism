@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Working on current directory: $(pwd)"
+echo Working on current directory: $(pwd)
 pnpm i
 
 for d in ./*/ ; do

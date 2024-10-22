@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 # Ignore all instances of test-framework in subdirectories
-**/test-framework/
+**/test-framework
 
 # Don't ignore test-framework in the root
-!/test-framework/
+!./test-framework

@@ -1,4 +1,5 @@
 @ECHO OFF
+SETLOCAL
 
 SET LOCK_FILE=pnpm-lock.yaml
 SET NODE_MODULES=node_modules
@@ -25,3 +26,5 @@ FOR /D %%d IN (*) DO (
 
 ECHO All %NODE_MODULES% folders have been deleted.
 ECHO Total folders deleted: %COUNT%
+
+ENDLOCAL
