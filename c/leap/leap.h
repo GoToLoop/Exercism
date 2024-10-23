@@ -1,2 +1,1 @@
-#pragma once
-short leap_year(short year);
+#define leap_year(year) !( year % 100 ? year % 4 : year % 400 )
