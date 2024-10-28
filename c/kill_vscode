@@ -1,0 +1,2 @@
+#!/bin/sh
+find -name ".vscode" -type d -prune -exec rm -rf '{}' +
