@@ -52,8 +52,7 @@ const QUANTITIES = Object.freeze({ noodles: 50, sauce: .2 });
 export function quantities(layers, quantities={ noodles: 0, sauce: 0 }) {
   for (const ingredient of layers) if (ingredient in QUANTITIES)
     quantities[ingredient] += QUANTITIES[ingredient];
-  return quantities;
-}
+  return quantities; }
 
 /**
  * Adds the last ingredient from your friend's lasagna to your own lasagna.
@@ -94,5 +93,4 @@ export const addSecretIngredient = (ingredients, layers) => void
 export function scaleRecipe(recipe, portion=2) {
   const scale = portion / 2, scaledRecipe = { ...recipe };
   for (const ingredient in recipe) scaledRecipe[ingredient] *= scale;
-  return scaledRecipe;
-}
+  return scaledRecipe; }
