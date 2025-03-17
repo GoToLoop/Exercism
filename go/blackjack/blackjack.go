@@ -2,7 +2,7 @@ package blackjack
 
 // A map of Blackjack card values, indicating each card's worth in the game.
 // Face cards (jack, queen, king) are worth 10, and an ace can be worth 11.
-var deck = map[string]int { "two": 2, "three": 3, "four": 4, "five": 5,
+var deck = map[string]int{ "two": 2, "three": 3, "four": 4, "five": 5,
 	"six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
 	"jack": 10, "queen": 10, "king": 10, "ace": 11 }
 

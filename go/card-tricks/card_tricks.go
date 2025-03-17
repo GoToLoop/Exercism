@@ -1,7 +1,7 @@
 package cards
 
 // FavoriteCards returns a slice with the cards 2, 6 and 9 in that order.
-func FavoriteCards() []int { return []int { 2, 6, 9 } }
+func FavoriteCards() []int { return []int{ 2, 6, 9 } }
 
 // GetItem retrieves an item from a slice at given position.
 // If the index is out of range, we want it to return -1.
@@ -23,9 +23,9 @@ func RemoveItem(lst []int, i int) []int {
 // It returns true if the index is valid, otherwise it returns false.
 //
 // Parameters:
-// - lst: A slice of any type.
-// - idx: The index to check.
+// 	- lst: A slice of any type.
+// 	- idx: The index to check.
 //
 // Returns:
-// - bool: true if the index is within bounds, false otherwise.
-func inRange[T any](lst []T, i int) bool { return i >= 0 && i < len(lst) }
+// 	- true if the index is within bounds, false otherwise.
+func inRange[T any](lst []T, idx int) bool { return idx >= 0 && idx < len(lst) }
