@@ -15,7 +15,7 @@ func Drive(car Car) Car { bat := car.battery - car.batteryDrain
 
 // CanFinish checks if a car is able to finish a certain track.
 func CanFinish(c Car, t Track) bool {
-	// Check if there's enough available battery charge for the difference between
-	// track distance and covered distance, multiplied by battery drain per move,
-	// then divided by car movement speed:
+	// Check if there's enough available battery charge for the difference
+	// between track distance and covered distance, multiplied by battery drain
+	// per move, then divided by car movement speed:
 	return c.battery >= (t.distance - c.distance) * c.batteryDrain / c.speed }

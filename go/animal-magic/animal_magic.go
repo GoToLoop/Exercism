@@ -7,8 +7,8 @@ func RollADie() int { return 1 + rand.Intn(20) }
 func GenerateWandEnergy() float64 { return 12 * rand.Float64() }
 
 // ShuffleAnimals returns a slice with all eight animal strings in random order.
-func ShuffleAnimals() []string { perms := make([]string, 8)
-	for i, rnd := range rand.Perm(8) { perms[i] = animals[rnd] }; return perms }
+func ShuffleAnimals() (perms []string) { perms = make([]string, 8)
+	for i, rnd := range rand.Perm(8) { perms[i] = animals[rnd] }; return }
 
 var animals = [...]string {
 	"ant", "beaver", "cat", "dog", "elephant", "fox", "giraffe", "hedgehog" }

@@ -1,6 +1,5 @@
-// @ts-check
-
-import { totalBirdCount, birdsInWeek, fixBirdCountLog } from './bird-watcher';
+import { describe, expect, test } from '@jest/globals';
+import { birdsInWeek, fixBirdCountLog, totalBirdCount } from './bird-watcher';
 
 describe('totalBirdCount', () => {
   test('calculates the correct total number of birds', () => {
@@ -76,5 +75,5 @@ describe('fixBirdCountLog', () => {
 });
 
 function randomArray(length) {
-  return Array.from({ length }, () => Math.random() * 8 || 0);
+  return Array.from({ length: length }, () => Math.floor(Math.random() * 8));
 }

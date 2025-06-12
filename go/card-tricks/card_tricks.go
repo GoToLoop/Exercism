@@ -9,8 +9,8 @@ func GetItem(l []int, i int) int { if inRange(l, i) { return l[i] }; return -1 }
 
 // SetItem writes an item to a slice at given position overwriting an
 // existing value. If the index is out of range the value needs to be appended.
-func SetItem(lst []int, i, v int) []int {
-	if inRange(lst, i) { lst[i] = v } else { lst = append(lst, v) }; return lst }
+func SetItem(ls []int, i, v int) []int {
+	if inRange(ls, i) { ls[i] = v } else { ls = append(ls, v) }; return ls }
 
 // PrependItems adds an arbitrary number of values at the front of a slice.
 func PrependItems(lst []int, vals ...int) []int { return append(vals, lst...) }

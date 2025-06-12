@@ -28,6 +28,6 @@ const extra = (tops, $=PRICES[tops[0]]) => $ ? $ + extra(tops.slice(1)) : 0;
  * @param {PizzaOrder[]} ords a list of pizza orders
  * @returns {number} the price of the total order
  */
-export function orderPrice(ords, [o]=ords) {
+export function orderPrice(ords/*, [o]=ords*/) {
   //return o ? pizzaPrice(o.pizza, ...o.extras) + orderPrice(ords.slice(1)) : 0;
   return ords.reduce(($, ord) => $ + pizzaPrice(ord.pizza, ...ord.extras), 0); }
