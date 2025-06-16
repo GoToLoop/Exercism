@@ -1,5 +1,5 @@
 package booking; import t "time"; const L1 = "1/2/2006 15:04:05"
-const L2 = "January 2, 2006 15:04:05"; const L3 = "Monday, " + L2
+const L2, L3 = "January 2, 2006 15:04:05", "Monday, " + L2
 const L4 = "You have an appointment on Monday, January 2, 2006, at 15:04."
 
 // Schedule returns a time.Time from a string containing a date.
