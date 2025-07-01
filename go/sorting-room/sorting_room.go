@@ -19,8 +19,8 @@ func DescribeNumberBox(nb NumberBox) string {
 
 // ExtractFancyNumber should return the integer value for a FancyNumber
 // and 0 if any other FancyNumberBox is supplied.
-func ExtractFancyNumber(fnb FancyNumberBox) int { if f, ok := fnb.(FancyNumber);
-	ok { i, _ := s.Atoi(f.n); return i }; return 0 }
+func ExtractFancyNumber(fnb FancyNumberBox) int {
+	f, _ := fnb.(FancyNumber); i, _ := s.Atoi(f.n); return i }
 
 // DescribeFancyNumberBox should return a string describing the FancyNumberBox.
 func DescribeFancyNumberBox(fnb FancyNumberBox) string {
