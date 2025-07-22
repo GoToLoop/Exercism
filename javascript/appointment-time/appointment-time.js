@@ -52,7 +52,7 @@ export function getAppointmentDetails(stamp) { const d = new Date(stamp);
  */
 export function updateAppointment(stamp, opts) {
   const a = getAppointmentDetails(stamp); for (const p in opts) a[p] = opts[p];
-  return getAppointmentDetails(getAppointmentTimestamp(toDate(a))); }
+  return getAppointmentDetails( getAppointmentTimestamp(toDate(a)) ); }
 
 /**
  * Convert an appointment to a date object
