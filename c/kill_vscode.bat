@@ -5,7 +5,7 @@ SET VSCODE=.vscode
 SET /A COUNT=0
 
 FOR /D %%d IN (*) DO (
-    iF EXIST %%d\%VSCODE% (
+    IF EXIST %%d\%VSCODE% (
         ECHO Deleting %VSCODE% in %%d...
         RMDIR /S /Q %%d\%VSCODE%
         SET /A COUNT+=1

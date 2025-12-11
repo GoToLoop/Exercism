@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# If an argument is provided, use it as project folder
+if [ "$#" -gt 0 ]; then
+  project=$1
+  # Navigate into the project folder
+  cd "$project" || { echo "Folder $project not found"; exit 1; }
+else
+  # No argument provided, assume current directory is the project folder
+  project=$(basename "$PWD")
+fi
+
+# Replace '-' with '_' for the filename
+project=$(echo "$project" | tr '-' '_')
+
+# Create a Fortran source file with the same name as the folder
+touch "$project.f90"
+
+# Remove build directory if it exists
+[ -d build ] && rm -rf build
+
+# Create build directory and move into it
+mkdir build && cd build || exit 1
+
+# Run CMake with Unix Makefiles generator
+cmake -G "Unix Makefiles" ..

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# If an argument is provided, use it as project folder
+if [ "$#" -gt 0 ]; then
+  project=$1
+  # Navigate into the project folder
+  cd "$project" || { echo "Folder $project not found"; exit 1; }
+else
+  # No argument provided, assume current directory is the project folder
+  project=$(basename "$PWD")
+fi
+
+# Enter "build" subfolder
+cd build || exit 1
+
+# Compile with make and test it with ctest
+make && ctest -V
