@@ -34,4 +34,9 @@
 
 # Ignore build directories
 build/
-testlib/
+
+# Ignore all instances of testlib/ in subdirectories
+**/testlib/
+
+# Don't ignore testlib/ in the root
+!./testlib/
