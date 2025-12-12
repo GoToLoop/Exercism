@@ -7,10 +7,10 @@
  * @param {Node} p - previous node
  * @param {Node=} n - next node
  */
-function Node(v=NaN, p=this, n) { this.v = v, this.p = p, this.n = n; }
+function Node(v=NaN, p=Node.N, n) { this.v = v, this.p = p, this.n = n; }
 
 Node.prototype.kill = function () { // assigns undefined to both node ends
-  return this.p = this.n = /** @type {*} */(void 0), this; }
+  return this.p = this.n = /** @type {*} */(void 0), this; }; Node.N = new Node;
 
 class Anchor {head = /** @type {Node=} */(void 0); tail = this.head; size = 0;}
 
