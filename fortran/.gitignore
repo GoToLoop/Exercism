@@ -32,11 +32,14 @@
 *.out
 *.app
 
+# Ignore VSCode custom configs
+.vscode/
+
 # Ignore build directories
 build/
 
-# Ignore all instances of testlib/ in subdirectories
-**/testlib/
+# Ignore all instances of testlib in subdirectories
+*/testlib
 
-# Don't ignore testlib/ in the root
-!./testlib/
+# Don't ignore testlib in the root
+!./testlib

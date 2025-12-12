@@ -51,11 +51,11 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# Ignore VSCode custom configs
+.vscode/
+
 # Ignore all instances of test-framework in subdirectories
-**/test-framework
+*/test-framework
 
 # Don't ignore test-framework in the root
 !./test-framework
-
-# ignore VSCode custom configs
-.vscode/
