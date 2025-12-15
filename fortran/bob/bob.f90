@@ -12,7 +12,7 @@ MODULE bob; CONTAINS
 
     t = strip(s); IF (len(t) .EQ. 0) THEN; hey = HEYS(1); RETURN; END IF
 
-    non_lower = scan(s, 'abcdefghijklmnopqrstuvwxyz') == 0 ! no lower chars
+    non_lower = scan(t, 'abcdefghijklmnopqrstuvwxyz') == 0 ! no lower chars
     has_upper = scan(t, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') /= 0 ! at least 1 upper
 
     yell = non_lower .AND. has_upper; ask = t(len(t):) .EQ. '?'
