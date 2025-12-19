@@ -22,5 +22,11 @@ touch "$project.f90"
 # Create build directory and move into it
 mkdir build && cd build || exit 1
 
+# Create a .directory file with desktop entry info
+cat > .directory <<EOF
+[Desktop Entry]
+Icon=folder-build
+EOF
+
 # Run CMake with Unix Makefiles generator
 cmake -G "Unix Makefiles" ..
