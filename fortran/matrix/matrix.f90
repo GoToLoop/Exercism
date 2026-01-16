@@ -5,4 +5,4 @@ MODULE matrix; CONTAINS ! Get an int row or column from a str matrix of numbers
 
   PURE FUNCTION column(m, d, j) RESULT(c); INTEGER, INTENT(IN) :: d(2), j
     CHARACTER(*), INTENT(IN) :: m(d(1)); INTEGER c(d(1)), mat(d(1), d(2))
-    DO i = 1, d(1); mat(i, :) = row(m, d, i); END DO; c = mat(:, j); END; END
+    FORALL (i=1:d(1)) mat(i, :) = row(m, d, i); c = mat(:, j); END; END
