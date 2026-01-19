@@ -1,30 +1,28 @@
 // @ts-check
 
-/**
- * This frozen array represents the types of vehicles that require a license.
- */
+/** This frozen array represents the types of vehicles that require a license.*/
 export const LICENSED_VEHICLE_TYPES = Object.freeze([ 'car', 'truck' ]);
 
 /**
  * Determines whether you need a license to operate a certain kind of vehicle.
  *
- * @param {string} kind the vehicle type to check
+ * @param {string} kind - the vehicle type to check
+ *
  * @returns {boolean} whether or not a license is required for `kind`
  */
 export function needsLicense(kind) {
   return LICENSED_VEHICLE_TYPES.includes( kind.trim().toLowerCase() ); }
 
-/**
- * Advice message added to recommended vehicle
- */
+/** Advice message added to recommended vehicle.*/
 const ADVICE = ' is clearly the better choice.';
 
 /**
  * Helps choosing between two options by recommending the one that
  * comes first in dictionary order.
  *
- * @param {string} option1 the first vehicle option to consider
- * @param {string} option2 the second vehicle option to consider
+ * @param {string} option1 - the first vehicle option to consider
+ * @param {string} option2 - the second vehicle option to consider
+ *
  * @returns {string} a recommendation message indicating which
  * vehicle option to choose based on alphabetical order
  */
@@ -47,8 +45,9 @@ export const AGE_TO_RESELL_PERCENTAGE = Object.freeze(new Map([
  * Calculates an estimate for the price of a used vehicle in the dealership
  * based on the original price and the age of the vehicle.
  *
- * @param {number} originalPrice vehicle's brand new price
- * @param {number} age how old vehicle is
+ * @param {number} originalPrice - vehicle's brand new price
+ * @param {number} age - how old vehicle is
+ *
  * @returns {number=} expected resell price in the dealership
  */
 export function calculateResellPrice(originalPrice, age) {
