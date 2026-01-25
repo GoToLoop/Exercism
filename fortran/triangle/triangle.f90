@@ -14,20 +14,20 @@ MODULE triangle; INTERFACE scalene; MODULE PROCEDURE scal, i_scal; END INTERFACE
   PURE FUNCTION i_uni(arr); INTEGER, INTENT(IN) :: arr(:); ALLOCATABLE i_uni(:)
     i_uni = pack(arr, [(.NOT. any(arr(i) == arr(:i - 1)), i=1, size(arr))]); END
 
-  PURE LOGICAL FUNCTION scal(t); REAL, INTENT(IN) :: t(3) ! scalene
+  PURE LOGICAL FUNCTION scal(t); REAL, INTENT(IN) :: t(3) ! is scalene
     scal = valid(t) .AND. size(uni(t)) == 3; END FUNCTION
 
-  PURE LOGICAL FUNCTION i_scal(t); INTEGER, INTENT(IN) :: t(3) ! scalene
+  PURE LOGICAL FUNCTION i_scal(t); INTEGER, INTENT(IN) :: t(3) ! is scalene
     i_scal = i_valid(t) .AND. size(i_uni(t)) == 3; END FUNCTION
 
-  PURE LOGICAL FUNCTION equi(t); REAL, INTENT(IN) :: t(3) ! equilateral
+  PURE LOGICAL FUNCTION equi(t); REAL, INTENT(IN) :: t(3) ! is equilateral
     equi = valid(t) .AND. size(uni(t)) == 1; END FUNCTION
 
-  PURE LOGICAL FUNCTION i_equi(t); INTEGER, INTENT(IN) :: t(3) ! equilateral
+  PURE LOGICAL FUNCTION i_equi(t); INTEGER, INTENT(IN) :: t(3) ! is equilateral
     i_equi = i_valid(t) .AND. size(i_uni(t)) == 1; END FUNCTION
 
-  PURE LOGICAL FUNCTION isos(t); REAL, INTENT(IN) :: t(3) ! isosceles
+  PURE LOGICAL FUNCTION isos(t); REAL, INTENT(IN) :: t(3) ! is isosceles
     l = size(uni(t)); isos = valid(t) .AND. l > 0 .AND. l < 3; END FUNCTION
 
-  PURE LOGICAL FUNCTION i_isos(t); INTEGER, INTENT(IN) :: t(3) ! isosceles
+  PURE LOGICAL FUNCTION i_isos(t); INTEGER, INTENT(IN) :: t(3) ! is isosceles
     l = size(i_uni(t)); i_isos = i_valid(t) .AND. l > 0 .AND. l < 3; END; END
