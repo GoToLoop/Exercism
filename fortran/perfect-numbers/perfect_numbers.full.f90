@@ -34,13 +34,14 @@ END MODULE perfect_numbers
 PROGRAM test_drive
   USE perfect_numbers
   CHARACTER classifications(30)*9
+  INTEGER :: nums(size(classifications)) = (/(i, i=1, size(classifications))/)
+
+  classifications = classify(nums)
 
   PRINT *, "Nicomachus' aliquot sum classification:"
 
-  ! Create array 1..30 and classify all at once
-  FORALL (k=1:size(classifications)) classifications(k) = classify(k)
-
-  DO k = 1, 30
-    PRINT '(I3,2X,A)', k, classifications(k)
+  DO i = 1, size(classifications)
+    PRINT '(I3,2X,A)', i, classifications(i)
   END DO
+
 END PROGRAM test_drive
